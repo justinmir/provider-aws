@@ -20,6 +20,7 @@ package v1alpha1
 
 import (
 	"context"
+
 	v1alpha1 "github.com/crossplane-contrib/provider-aws/apis/cloudwatchlogs/v1alpha1"
 	manualv1alpha1 "github.com/crossplane-contrib/provider-aws/apis/ec2/manualv1alpha1"
 	v1beta1 "github.com/crossplane-contrib/provider-aws/apis/ec2/v1beta1"

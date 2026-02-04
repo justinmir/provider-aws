@@ -28,6 +28,22 @@ var (
 )
 
 // +kubebuilder:skipversion
+type ASNAssociation struct {
+	ASN *string `json:"asn,omitempty"`
+
+	CIDR *string `json:"cidr,omitempty"`
+
+	StatusMessage *string `json:"statusMessage,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type ASNAuthorizationContext struct {
+	Message *string `json:"message,omitempty"`
+
+	Signature *string `json:"signature,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type AcceleratorCount struct {
 	Max *int64 `json:"max,omitempty"`
 
@@ -208,6 +224,8 @@ type AnalysisPacketHeader struct {
 type AnalysisRouteTableRoute struct {
 	CarrierGatewayID *string `json:"carrierGatewayID,omitempty"`
 
+	CoreNetworkARN *string `json:"coreNetworkARN,omitempty"`
+
 	DestinationCIDR *string `json:"destinationCIDR,omitempty"`
 
 	DestinationPrefixListID *string `json:"destinationPrefixListID,omitempty"`
@@ -253,6 +271,8 @@ type AssignedPrivateIPAddress struct {
 
 // +kubebuilder:skipversion
 type AssociatedRole struct {
+	AssociatedRoleARN *string `json:"associatedRoleARN,omitempty"`
+
 	CertificateS3BucketName *string `json:"certificateS3BucketName,omitempty"`
 
 	CertificateS3ObjectKey *string `json:"certificateS3ObjectKey,omitempty"`
@@ -385,10 +405,21 @@ type BundleTaskError struct {
 }
 
 // +kubebuilder:skipversion
+type Byoasn struct {
+	ASN *string `json:"asn,omitempty"`
+
+	IPAMID *string `json:"ipamID,omitempty"`
+
+	StatusMessage *string `json:"statusMessage,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type ByoipCIDR struct {
 	CIDR *string `json:"cidr,omitempty"`
 
 	Description *string `json:"description,omitempty"`
+
+	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty"`
 
 	StatusMessage *string `json:"statusMessage,omitempty"`
 }
@@ -770,6 +801,8 @@ type CoipCIDR struct {
 
 // +kubebuilder:skipversion
 type CoipPool struct {
+	PoolARN *string `json:"poolARN,omitempty"`
+
 	PoolCIDRs []*string `json:"poolCIDRs,omitempty"`
 
 	Tags []*Tag `json:"tags,omitempty"`
@@ -807,6 +840,42 @@ type ConnectionNotification struct {
 }
 
 // +kubebuilder:skipversion
+type ConnectionTrackingConfiguration struct {
+	TCPEstablishedTimeout *int64 `json:"tcpEstablishedTimeout,omitempty"`
+
+	UDPStreamTimeout *int64 `json:"udpStreamTimeout,omitempty"`
+
+	UDPTimeout *int64 `json:"udpTimeout,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type ConnectionTrackingSpecification struct {
+	TCPEstablishedTimeout *int64 `json:"tcpEstablishedTimeout,omitempty"`
+
+	UDPStreamTimeout *int64 `json:"udpStreamTimeout,omitempty"`
+
+	UDPTimeout *int64 `json:"udpTimeout,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type ConnectionTrackingSpecificationRequest struct {
+	TCPEstablishedTimeout *int64 `json:"tcpEstablishedTimeout,omitempty"`
+
+	UDPStreamTimeout *int64 `json:"udpStreamTimeout,omitempty"`
+
+	UDPTimeout *int64 `json:"udpTimeout,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type ConnectionTrackingSpecificationResponse struct {
+	TCPEstablishedTimeout *int64 `json:"tcpEstablishedTimeout,omitempty"`
+
+	UDPStreamTimeout *int64 `json:"udpStreamTimeout,omitempty"`
+
+	UDPTimeout *int64 `json:"udpTimeout,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type ConversionTask struct {
 	ConversionTaskID *string `json:"conversionTaskID,omitempty"`
 
@@ -836,6 +905,8 @@ type CreateTransitGatewayVPCAttachmentRequestOptions struct {
 	DNSSupport *string `json:"dnsSupport,omitempty"`
 
 	IPv6Support *string `json:"ipv6Support,omitempty"`
+
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty"`
 }
 
 // +kubebuilder:skipversion
@@ -845,6 +916,8 @@ type CreateVerifiedAccessEndpointEniOptions struct {
 
 // +kubebuilder:skipversion
 type CreateVerifiedAccessTrustProviderDeviceOptions struct {
+	PublicSigningKeyURL *string `json:"publicSigningKeyURL,omitempty"`
+
 	TenantID *string `json:"tenantID,omitempty"`
 }
 
@@ -881,6 +954,8 @@ type CreditSpecificationRequest struct {
 // +kubebuilder:skipversion
 type CustomerGateway struct {
 	BGPASN *string `json:"bgpASN,omitempty"`
+
+	BGPASNExtended *string `json:"bgpASNExtended,omitempty"`
 
 	CertificateARN *string `json:"certificateARN,omitempty"`
 
@@ -1058,6 +1133,8 @@ type DestinationOptionsResponse struct {
 
 // +kubebuilder:skipversion
 type DeviceOptions struct {
+	PublicSigningKeyURL *string `json:"publicSigningKeyURL,omitempty"`
+
 	TenantID *string `json:"tenantID,omitempty"`
 }
 
@@ -1158,11 +1235,15 @@ type EBSBlockDevice struct {
 
 // +kubebuilder:skipversion
 type EBSInstanceBlockDevice struct {
+	AssociatedResource *string `json:"associatedResource,omitempty"`
+
 	AttachTime *metav1.Time `json:"attachTime,omitempty"`
 
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty"`
 
 	VolumeID *string `json:"volumeID,omitempty"`
+
+	VolumeOwnerID *string `json:"volumeOwnerID,omitempty"`
 }
 
 // +kubebuilder:skipversion
@@ -1181,6 +1262,8 @@ type EC2InstanceConnectEndpoint struct {
 	DNSName *string `json:"dnsName,omitempty"`
 
 	FipsDNSName *string `json:"fipsDNSName,omitempty"`
+
+	InstanceConnectEndpointARN *string `json:"instanceConnectEndpointARN,omitempty"`
 
 	OwnerID *string `json:"ownerID,omitempty"`
 
@@ -1338,6 +1421,8 @@ type Explanation struct {
 	Direction *string `json:"direction,omitempty"`
 
 	ExplanationCode *string `json:"explanationCode,omitempty"`
+
+	LoadBalancerARN *string `json:"loadBalancerARN,omitempty"`
 
 	MissingComponent *string `json:"missingComponent,omitempty"`
 
@@ -1507,6 +1592,8 @@ type FirewallStatefulRule struct {
 
 	RuleAction *string `json:"ruleAction,omitempty"`
 
+	RuleGroupARN *string `json:"ruleGroupARN,omitempty"`
+
 	Sources []*string `json:"sources,omitempty"`
 }
 
@@ -1515,6 +1602,8 @@ type FirewallStatelessRule struct {
 	Destinations []*string `json:"destinations,omitempty"`
 
 	RuleAction *string `json:"ruleAction,omitempty"`
+
+	RuleGroupARN *string `json:"ruleGroupARN,omitempty"`
 
 	Sources []*string `json:"sources,omitempty"`
 }
@@ -1886,6 +1975,10 @@ type IKEVersionsRequestListValue struct {
 type IPAM struct {
 	Description *string `json:"description,omitempty"`
 
+	IPAMARN *string `json:"ipamARN,omitempty"`
+
+	IPAMID *string `json:"ipamID,omitempty"`
+
 	IPAMRegion *string `json:"ipamRegion,omitempty"`
 
 	OwnerID *string `json:"ownerID,omitempty"`
@@ -1893,6 +1986,8 @@ type IPAM struct {
 	ResourceDiscoveryAssociationCount *int64 `json:"resourceDiscoveryAssociationCount,omitempty"`
 
 	ScopeCount *int64 `json:"scopeCount,omitempty"`
+
+	StateMessage *string `json:"stateMessage,omitempty"`
 
 	Tags []*Tag `json:"tags,omitempty"`
 }
@@ -1935,7 +2030,38 @@ type IPAMDiscoveredAccount struct {
 }
 
 // +kubebuilder:skipversion
+type IPAMDiscoveredPublicAddress struct {
+	Address *string `json:"address,omitempty"`
+
+	AddressAllocationID *string `json:"addressAllocationID,omitempty"`
+
+	AddressOwnerID *string `json:"addressOwnerID,omitempty"`
+
+	AddressRegion *string `json:"addressRegion,omitempty"`
+
+	InstanceID *string `json:"instanceID,omitempty"`
+
+	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty"`
+
+	NetworkInterfaceDescription *string `json:"networkInterfaceDescription,omitempty"`
+
+	NetworkInterfaceID *string `json:"networkInterfaceID,omitempty"`
+
+	PublicIPv4PoolID *string `json:"publicIPv4PoolID,omitempty"`
+
+	SampleTime *metav1.Time `json:"sampleTime,omitempty"`
+
+	ServiceResource *string `json:"serviceResource,omitempty"`
+
+	SubnetID *string `json:"subnetID,omitempty"`
+
+	VPCID *string `json:"vpcID,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type IPAMDiscoveredResourceCIDR struct {
+	AvailabilityZoneID *string `json:"availabilityZoneID,omitempty"`
+
 	ResourceCIDR *string `json:"resourceCIDR,omitempty"`
 
 	ResourceID *string `json:"resourceID,omitempty"`
@@ -1955,6 +2081,31 @@ type IPAMDiscoveryFailureReason struct {
 }
 
 // +kubebuilder:skipversion
+type IPAMExternalResourceVerificationToken_SDK struct {
+	IPAMARN *string `json:"ipamARN,omitempty"`
+
+	IPAMExternalResourceVerificationTokenARN *string `json:"ipamExternalResourceVerificationTokenARN,omitempty"`
+
+	IPAMExternalResourceVerificationTokenID *string `json:"ipamExternalResourceVerificationTokenID,omitempty"`
+
+	IPAMID *string `json:"ipamID,omitempty"`
+
+	IPAMRegion *string `json:"ipamRegion,omitempty"`
+
+	NotAfter *metav1.Time `json:"notAfter,omitempty"`
+
+	State *string `json:"state,omitempty"`
+
+	Status *string `json:"status,omitempty"`
+
+	Tags []*Tag `json:"tags,omitempty"`
+
+	TokenName *string `json:"tokenName,omitempty"`
+
+	TokenValue *string `json:"tokenValue,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type IPAMOperatingRegion struct {
 	RegionName *string `json:"regionName,omitempty"`
 }
@@ -1965,7 +2116,13 @@ type IPAMPool struct {
 
 	Description *string `json:"description,omitempty"`
 
+	IPAMARN *string `json:"ipamARN,omitempty"`
+
+	IPAMPoolARN *string `json:"ipamPoolARN,omitempty"`
+
 	IPAMRegion *string `json:"ipamRegion,omitempty"`
+
+	IPAMScopeARN *string `json:"ipamScopeARN,omitempty"`
 
 	Locale *string `json:"locale,omitempty"`
 
@@ -2006,7 +2163,43 @@ type IPAMPoolCIDRFailureReason struct {
 }
 
 // +kubebuilder:skipversion
+type IPAMPoolSourceResource struct {
+	ResourceID *string `json:"resourceID,omitempty"`
+
+	ResourceOwner *string `json:"resourceOwner,omitempty"`
+
+	ResourceRegion *string `json:"resourceRegion,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type IPAMPoolSourceResourceRequest struct {
+	ResourceID *string `json:"resourceID,omitempty"`
+
+	ResourceOwner *string `json:"resourceOwner,omitempty"`
+
+	ResourceRegion *string `json:"resourceRegion,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type IPAMPublicAddressSecurityGroup struct {
+	GroupID *string `json:"groupID,omitempty"`
+
+	GroupName *string `json:"groupName,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type IPAMPublicAddressTag struct {
+	Key *string `json:"key,omitempty"`
+
+	Value *string `json:"value,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type IPAMResourceCIDR struct {
+	AvailabilityZoneID *string `json:"availabilityZoneID,omitempty"`
+
+	IPAMID *string `json:"ipamID,omitempty"`
+
 	ResourceCIDR *string `json:"resourceCIDR,omitempty"`
 
 	ResourceID *string `json:"resourceID,omitempty"`
@@ -2037,6 +2230,10 @@ type IPAMResourceDiscovery struct {
 
 // +kubebuilder:skipversion
 type IPAMResourceDiscoveryAssociation struct {
+	IPAMARN *string `json:"ipamARN,omitempty"`
+
+	IPAMID *string `json:"ipamID,omitempty"`
+
 	IPAMRegion *string `json:"ipamRegion,omitempty"`
 
 	IPAMResourceDiscoveryAssociationARN *string `json:"ipamResourceDiscoveryAssociationARN,omitempty"`
@@ -2059,7 +2256,11 @@ type IPAMResourceTag struct {
 type IPAMScope struct {
 	Description *string `json:"description,omitempty"`
 
+	IPAMARN *string `json:"ipamARN,omitempty"`
+
 	IPAMRegion *string `json:"ipamRegion,omitempty"`
+
+	IPAMScopeARN *string `json:"ipamScopeARN,omitempty"`
 
 	IsDefault *bool `json:"isDefault,omitempty"`
 
@@ -2150,6 +2351,8 @@ type Image struct {
 
 	DeprecationTime *string `json:"deprecationTime,omitempty"`
 
+	DeregistrationProtection *string `json:"deregistrationProtection,omitempty"`
+
 	Description *string `json:"description,omitempty"`
 
 	ENASupport *bool `json:"enaSupport,omitempty"`
@@ -2161,6 +2364,8 @@ type Image struct {
 	ImageOwnerAlias *string `json:"imageOwnerAlias,omitempty"`
 
 	KernelID *string `json:"kernelID,omitempty"`
+
+	LastLaunchedTime *string `json:"lastLaunchedTime,omitempty"`
 
 	Name *string `json:"name,omitempty"`
 
@@ -2485,6 +2690,11 @@ type InstanceNetworkInterfaceSpecification struct {
 	AssociateCarrierIPAddress *bool `json:"associateCarrierIPAddress,omitempty"`
 
 	AssociatePublicIPAddress *bool `json:"associatePublicIPAddress,omitempty"`
+	// A security group connection tracking specification request that enables you
+	// to set the idle timeout for connection tracking on an Elastic network interface.
+	// For more information, see Connection tracking timeouts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts)
+	// in the Amazon EC2 User Guide.
+	ConnectionTrackingSpecification *ConnectionTrackingSpecificationRequest `json:"connectionTrackingSpecification,omitempty"`
 
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty"`
 
@@ -2567,6 +2777,8 @@ type InstanceRequirements struct {
 	LocalStorage *string `json:"localStorage,omitempty"`
 
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty"`
+
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *int64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty"`
 	// The minimum and maximum amount of memory per vCPU, in GiB.
 	MemoryGiBPerVCPU *MemoryGiBPerVCPU `json:"memoryGiBPerVCPU,omitempty"`
 	// The minimum and maximum amount of memory, in MiB.
@@ -2629,6 +2841,8 @@ type InstanceRequirementsRequest struct {
 	LocalStorage *string `json:"localStorage,omitempty"`
 
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty"`
+
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *int64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty"`
 	// The minimum and maximum amount of memory per vCPU, in GiB.
 	MemoryGiBPerVCPU *MemoryGiBPerVCPURequest `json:"memoryGiBPerVCPU,omitempty"`
 	// The minimum and maximum amount of memory, in MiB.
@@ -3058,6 +3272,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	AssociateCarrierIPAddress *bool `json:"associateCarrierIPAddress,omitempty"`
 
 	AssociatePublicIPAddress *bool `json:"associatePublicIPAddress,omitempty"`
+	// A security group connection tracking specification that enables you to set
+	// the idle timeout for connection tracking on an Elastic network interface.
+	// For more information, see Connection tracking timeouts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts)
+	// in the Amazon EC2 User Guide.
+	ConnectionTrackingSpecification *ConnectionTrackingSpecification `json:"connectionTrackingSpecification,omitempty"`
 
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty"`
 
@@ -3114,6 +3333,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	AssociateCarrierIPAddress *bool `json:"associateCarrierIPAddress,omitempty"`
 
 	AssociatePublicIPAddress *bool `json:"associatePublicIPAddress,omitempty"`
+	// A security group connection tracking specification request that enables you
+	// to set the idle timeout for connection tracking on an Elastic network interface.
+	// For more information, see Connection tracking timeouts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts)
+	// in the Amazon EC2 User Guide.
+	ConnectionTrackingSpecification *ConnectionTrackingSpecificationRequest `json:"connectionTrackingSpecification,omitempty"`
 
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty"`
 
@@ -3409,6 +3633,8 @@ type LocalGatewayRoute struct {
 
 	DestinationPrefixListID *string `json:"destinationPrefixListID,omitempty"`
 
+	LocalGatewayRouteTableARN *string `json:"localGatewayRouteTableARN,omitempty"`
+
 	NetworkInterfaceID *string `json:"networkInterfaceID,omitempty"`
 
 	OwnerID *string `json:"ownerID,omitempty"`
@@ -3419,6 +3645,8 @@ type LocalGatewayRoute struct {
 // +kubebuilder:skipversion
 type LocalGatewayRouteTable struct {
 	LocalGatewayID *string `json:"localGatewayID,omitempty"`
+
+	LocalGatewayRouteTableARN *string `json:"localGatewayRouteTableARN,omitempty"`
 
 	LocalGatewayRouteTableID *string `json:"localGatewayRouteTableID,omitempty"`
 
@@ -3435,6 +3663,8 @@ type LocalGatewayRouteTable struct {
 type LocalGatewayRouteTableVPCAssociation struct {
 	LocalGatewayID *string `json:"localGatewayID,omitempty"`
 
+	LocalGatewayRouteTableARN *string `json:"localGatewayRouteTableARN,omitempty"`
+
 	LocalGatewayRouteTableID *string `json:"localGatewayRouteTableID,omitempty"`
 
 	OwnerID *string `json:"ownerID,omitempty"`
@@ -3449,6 +3679,8 @@ type LocalGatewayRouteTableVPCAssociation struct {
 // +kubebuilder:skipversion
 type LocalGatewayRouteTableVirtualInterfaceGroupAssociation struct {
 	LocalGatewayID *string `json:"localGatewayID,omitempty"`
+
+	LocalGatewayRouteTableARN *string `json:"localGatewayRouteTableARN,omitempty"`
 
 	LocalGatewayRouteTableID *string `json:"localGatewayRouteTableID,omitempty"`
 
@@ -3488,6 +3720,26 @@ type LocalGatewayVirtualInterfaceGroup struct {
 }
 
 // +kubebuilder:skipversion
+type LockedSnapshotsInfo struct {
+	CoolOffPeriodExpiresOn *metav1.Time `json:"coolOffPeriodExpiresOn,omitempty"`
+
+	LockCreatedOn *metav1.Time `json:"lockCreatedOn,omitempty"`
+
+	LockDurationStartTime *metav1.Time `json:"lockDurationStartTime,omitempty"`
+
+	LockExpiresOn *metav1.Time `json:"lockExpiresOn,omitempty"`
+
+	OwnerID *string `json:"ownerID,omitempty"`
+
+	SnapshotID *string `json:"snapshotID,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type MacHost struct {
+	HostID *string `json:"hostID,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type MaintenanceDetails struct {
 	LastMaintenanceApplied *metav1.Time `json:"lastMaintenanceApplied,omitempty"`
 
@@ -3503,6 +3755,8 @@ type ManagedPrefixList struct {
 	MaxEntries *int64 `json:"maxEntries,omitempty"`
 
 	OwnerID *string `json:"ownerID,omitempty"`
+
+	PrefixListARN *string `json:"prefixListARN,omitempty"`
 
 	PrefixListID *string `json:"prefixListID,omitempty"`
 
@@ -3564,6 +3818,8 @@ type ModifyTransitGatewayOptions struct {
 
 	DNSSupport *string `json:"dnsSupport,omitempty"`
 
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty"`
+
 	VPNECMPSupport *string `json:"vpnECMPSupport,omitempty"`
 }
 
@@ -3574,6 +3830,8 @@ type ModifyTransitGatewayVPCAttachmentRequestOptions struct {
 	DNSSupport *string `json:"dnsSupport,omitempty"`
 
 	IPv6Support *string `json:"ipv6Support,omitempty"`
+
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty"`
 }
 
 // +kubebuilder:skipversion
@@ -3599,6 +3857,11 @@ type ModifyVPNTunnelOptionsSpecification struct {
 	TunnelInsideCIDR *string `json:"tunnelInsideCIDR,omitempty"`
 
 	TunnelInsideIPv6CIDR *string `json:"tunnelInsideIPv6CIDR,omitempty"`
+}
+
+// +kubebuilder:skipversion
+type ModifyVerifiedAccessTrustProviderDeviceOptions struct {
+	PublicSigningKeyURL *string `json:"publicSigningKeyURL,omitempty"`
 }
 
 // +kubebuilder:skipversion
@@ -3710,6 +3973,8 @@ type NetworkBandwidthGbpsRequest struct {
 type NetworkInsightsAccessScope struct {
 	CreatedDate *metav1.Time `json:"createdDate,omitempty"`
 
+	NetworkInsightsAccessScopeARN *string `json:"networkInsightsAccessScopeARN,omitempty"`
+
 	Tags []*Tag `json:"tags,omitempty"`
 
 	UpdatedDate *metav1.Time `json:"updatedDate,omitempty"`
@@ -3720,6 +3985,8 @@ type NetworkInsightsAccessScopeAnalysis struct {
 	AnalyzedEniCount *int64 `json:"analyzedEniCount,omitempty"`
 
 	EndDate *metav1.Time `json:"endDate,omitempty"`
+
+	NetworkInsightsAccessScopeAnalysisARN *string `json:"networkInsightsAccessScopeAnalysisARN,omitempty"`
 
 	StartDate *metav1.Time `json:"startDate,omitempty"`
 
@@ -3733,6 +4000,8 @@ type NetworkInsightsAccessScopeAnalysis struct {
 // +kubebuilder:skipversion
 type NetworkInsightsAnalysis struct {
 	AdditionalAccounts []*string `json:"additionalAccounts,omitempty"`
+
+	NetworkInsightsAnalysisARN *string `json:"networkInsightsAnalysisARN,omitempty"`
 
 	NetworkPathFound *bool `json:"networkPathFound,omitempty"`
 
@@ -3753,9 +4022,15 @@ type NetworkInsightsPath struct {
 
 	Destination *string `json:"destination,omitempty"`
 
+	DestinationARN *string `json:"destinationARN,omitempty"`
+
 	DestinationPort *int64 `json:"destinationPort,omitempty"`
 
+	NetworkInsightsPathARN *string `json:"networkInsightsPathARN,omitempty"`
+
 	Source *string `json:"source,omitempty"`
+
+	SourceARN *string `json:"sourceARN,omitempty"`
 
 	Tags []*Tag `json:"tags,omitempty"`
 }
@@ -4458,7 +4733,7 @@ type RequestLaunchTemplateData struct {
 	MaintenanceOptions *LaunchTemplateInstanceMaintenanceOptionsRequest `json:"maintenanceOptions,omitempty"`
 	// The metadata options for the instance. For more information, see Instance
 	// metadata and user data (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	MetadataOptions *LaunchTemplateInstanceMetadataOptionsRequest `json:"metadataOptions,omitempty"`
 	// Describes the monitoring for the instance.
 	Monitoring *LaunchTemplatesMonitoringRequest `json:"monitoring,omitempty"`
@@ -4720,7 +4995,7 @@ type ResponseLaunchTemplateData struct {
 	MaintenanceOptions *LaunchTemplateInstanceMaintenanceOptions `json:"maintenanceOptions,omitempty"`
 	// The metadata options for the instance. For more information, see Instance
 	// metadata and user data (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	MetadataOptions *LaunchTemplateInstanceMetadataOptions `json:"metadataOptions,omitempty"`
 	// Describes the monitoring for the instance.
 	Monitoring *LaunchTemplatesMonitoring `json:"monitoring,omitempty"`
@@ -4803,7 +5078,14 @@ type Route_SDK struct {
 }
 
 // +kubebuilder:skipversion
+type RuleGroupRuleOptionsPair struct {
+	RuleGroupARN *string `json:"ruleGroupARN,omitempty"`
+}
+
+// +kubebuilder:skipversion
 type RuleGroupTypePair struct {
+	RuleGroupARN *string `json:"ruleGroupARN,omitempty"`
+
 	RuleGroupType *string `json:"ruleGroupType,omitempty"`
 }
 
@@ -5045,6 +5327,8 @@ type SecurityGroupReference struct {
 	GroupID *string `json:"groupID,omitempty"`
 
 	ReferencingVPCID *string `json:"referencingVPCID,omitempty"`
+
+	TransitGatewayID *string `json:"transitGatewayID,omitempty"`
 
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionID,omitempty"`
 }
@@ -5763,6 +6047,8 @@ type TrafficMirrorFilterRule struct {
 
 	SourceCIDRBlock *string `json:"sourceCIDRBlock,omitempty"`
 
+	Tags []*Tag `json:"tags,omitempty"`
+
 	TrafficMirrorFilterID *string `json:"trafficMirrorFilterID,omitempty"`
 
 	TrafficMirrorFilterRuleID *string `json:"trafficMirrorFilterRuleID,omitempty"`
@@ -6025,6 +6311,8 @@ type TransitGatewayOptions struct {
 
 	PropagationDefaultRouteTableID *string `json:"propagationDefaultRouteTableID,omitempty"`
 
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty"`
+
 	TransitGatewayCIDRBlocks []*string `json:"transitGatewayCIDRBlocks,omitempty"`
 
 	VPNECMPSupport *string `json:"vpnECMPSupport,omitempty"`
@@ -6134,6 +6422,8 @@ type TransitGatewayRequestOptions struct {
 	DNSSupport *string `json:"dnsSupport,omitempty"`
 
 	MulticastSupport *string `json:"multicastSupport,omitempty"`
+
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty"`
 
 	TransitGatewayCIDRBlocks []*string `json:"transitGatewayCIDRBlocks,omitempty"`
 
@@ -6246,6 +6536,8 @@ type TransitGatewayVPCAttachmentOptions struct {
 	DNSSupport *string `json:"dnsSupport,omitempty"`
 
 	IPv6Support *string `json:"ipv6Support,omitempty"`
+
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty"`
 }
 
 // +kubebuilder:skipversion
@@ -6889,6 +7181,8 @@ type VerifiedAccessTrustProviderCondensed struct {
 
 // +kubebuilder:skipversion
 type VolumeAttachment struct {
+	AssociatedResource *string `json:"associatedResource,omitempty"`
+
 	AttachTime *metav1.Time `json:"attachTime,omitempty"`
 
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty"`
@@ -6896,6 +7190,8 @@ type VolumeAttachment struct {
 	Device *string `json:"device,omitempty"`
 
 	InstanceID *string `json:"instanceID,omitempty"`
+
+	InstanceOwningService *string `json:"instanceOwningService,omitempty"`
 
 	State *string `json:"state,omitempty"`
 
